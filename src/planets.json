@@ -1,0 +1,56 @@
+{ 
+	"mercury": {
+		"name"		: 	"Mercury",
+		"orbit"		: 	1,
+		"color"		: 	"#7a7979",
+		"radius"	: 	2
+	},
+	"venus" : {
+		"name" 		: 	"Venus",
+		"orbit" 	: 	2,
+		"color" 	: 	"#eaff99",
+		"radius" 	: 	3
+	},
+	"earth" : {
+		"name" 		: 	"Earth",
+		"orbit" 	: 	3,
+		"color" 	: 	"#44c0ff",
+		"radius" 	: 	3
+	},
+	"mars" : {
+		"name" 		: 	"Mars",
+		"orbit" 	: 	4,
+		"color"		: 	"#c9200e",
+		"radius"	:	2
+	},
+	"jupiter" : {
+		"name" 		: 	"Jupiter",
+		"orbit" 	: 	5,
+		"color" 	: 	"#c9710d",
+		"radius"	:	24
+	},
+	"saturn" : {
+		"name" 		: 	"Saturn",
+		"orbit" 	: 	6,
+		"color"		: 	"#ffe993",
+		"radius"	:	20
+	},
+	"uranus" : {
+		"name" 		: 	"Uranus",
+		"orbit" 	:	 7,
+		"color"		: 	"#bde2fc",
+		"radius" 	:	10
+	},
+	"neptune" : {
+		"name"		: 	"Neptune",
+		"orbit" 	: 	8,
+		"color"		: 	"#6b8ca3",
+		"radius"	:	9
+	},
+	"pluto" : {
+		"name" 		: 	"Pluto",
+		"orbit"		: 	9,
+		"color" 	: 	"#ceb9a1",
+		"radius" 	:	2
+	}
+}
