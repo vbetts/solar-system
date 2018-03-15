@@ -3,54 +3,81 @@
 		"name"		: 	"Mercury",
 		"orbit"		: 	1,
 		"color"		: 	"#7a7979",
-		"radius"	: 	2
+		"radius"	: 	2,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	0.64,
+		"o_period"	:	0.2
 	},
 	"venus" : {
 		"name" 		: 	"Venus",
 		"orbit" 	: 	2,
 		"color" 	: 	"#eaff99",
-		"radius" 	: 	3
+		"radius" 	: 	3,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	4.65,
+		"o_period"	:	0.6
 	},
 	"earth" : {
 		"name" 		: 	"Earth",
 		"orbit" 	: 	3,
 		"color" 	: 	"#44c0ff",
-		"radius" 	: 	3
+		"radius" 	: 	3,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	1.75,
+		"o_period"	:	1
 	},
 	"mars" : {
 		"name" 		: 	"Mars",
 		"orbit" 	: 	4,
 		"color"		: 	"#c9200e",
-		"radius"	:	2
+		"radius"	:	2,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	0.35,
+		"o_period"	:	1.9
 	},
 	"jupiter" : {
 		"name" 		: 	"Jupiter",
 		"orbit" 	: 	5,
 		"color" 	: 	"#c9710d",
-		"radius"	:	24
+		"radius"	:	24,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	3.54,
+		"o_period"	:	11.9
 	},
 	"saturn" : {
 		"name" 		: 	"Saturn",
 		"orbit" 	: 	6,
 		"color"		: 	"#ffe993",
-		"radius"	:	20
+		"radius"	:	20,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	0.66,
+		"o_period"	:	29.5
 	},
 	"uranus" : {
 		"name" 		: 	"Uranus",
 		"orbit" 	:	 7,
 		"color"		: 	"#bde2fc",
-		"radius" 	:	10
+		"radius" 	:	10,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	3.24,
+		"o_period"	:	84.0
 	},
 	"neptune" : {
 		"name"		: 	"Neptune",
 		"orbit" 	: 	8,
 		"color"		: 	"#6b8ca3",
-		"radius"	:	9
+		"radius"	:	9,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	4.16,
+		"o_period"	:	164.8
 	},
 	"pluto" : {
 		"name" 		: 	"Pluto",
 		"orbit"		: 	9,
 		"color" 	: 	"#ceb9a1",
-		"radius" 	:	2
+		"radius" 	:	2,
+		"date" 		: 	"1970-01-01",
+		"a_rad"		:	3.06,
+		"o_period"	:	248.0
 	}
 }

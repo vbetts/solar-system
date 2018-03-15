@@ -34,8 +34,8 @@ class Canvas extends Component {
 	draw_planet(ctx, planet){
 		let orbit_radius = planet.orbit*ORBIT_RAD_FACTOR
 		//the angle will change according to the time!	
-		let x = CENTER_X + orbit_radius * Math.cos(4.7)
-		let y = CENTER_Y + orbit_radius * Math.sin(4.7)
+		let x = CENTER_X + orbit_radius * Math.cos(planet.a_rad)
+		let y = CENTER_Y + orbit_radius * Math.sin(planet.a_rad)
 		ctx.fillStyle = planet.color
 		ctx.beginPath()
 		ctx.arc(x, y, planet.radius, 0, 2*Math.PI)
