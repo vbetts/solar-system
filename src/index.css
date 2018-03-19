@@ -1,6 +1,47 @@
 body {
-  margin: 30px;
+  margin: 30px 0px 0px 0px;
   padding: 0;
   font-family: sans-serif;
-  background-color: black;
+  background-color: #2d2d2d;
+}
+
+.controlsContainer {
+	margin: 30px auto 30px auto;
+	display: block;
+	width: 80%;
+}
+
+.react-date-picker__button {
+	background-color: white;
+}
+
+#canvasContainer {
+	width: 100%;
+	background-color: black;
+}
+.controlsContainer {
+	padding: 10px;
+}
+
+.btn {
+	display: block;
+	clear: both;
+}
+/*
+button {
+	padding: 15px;
+	font-size: 15px;
+}
+*/
+.calendars {
+	display: block;
+}
+
+
+.right {
+	float: right;
+}
+
+.left {
+	float: left;
 }
