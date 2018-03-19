@@ -56,7 +56,19 @@ class Canvas extends Component {
 
 	draw_planet(ctx, planet){
 		let orbit_radius = planet.orbit*ORBIT_RAD_FACTOR
+		
+		let rads = this.getPlanetPosition(planet)
+		
+		let x = CENTER_X + orbit_radius * Math.cos(rads)
+		let y = CENTER_Y + orbit_radius * Math.sin(rads)
+		ctx.fillStyle = planet.color
+		ctx.beginPath()
+		ctx.arc(x, y, planet.radius, 0, 2*Math.PI)
+		ctx.fill()
+		
+	}
 
+	getPlanetPosition(planet){
 		let unixStartTime = new Date(planet.date)
 		unixStartTime = unixStartTime.getTime()/1000
 		//There's not a quick and easy way to add days to a date in javascript
@@ -69,15 +81,10 @@ class Canvas extends Component {
 		
 		let diff_rads = (elapsedTime/planet.o_period) * (2*Math.PI);
 		let rads = planet.a_rad + diff_rads
-		
-		let x = CENTER_X + orbit_radius * Math.cos(rads)
-		let y = CENTER_Y + orbit_radius * Math.sin(rads)
-		ctx.fillStyle = planet.color
-		ctx.beginPath()
-		ctx.arc(x, y, planet.radius, 0, 2*Math.PI)
-		ctx.fill()
-		
+
+		return rads
 	}
+
 	render() {
 		return(
 		<div>
@@ -88,12 +95,18 @@ class Canvas extends Component {
 }
 class App extends Component {
 	constructor (props, context) {
-			//TODO: add max slider value= number of days between start date and end date
 		    super(props, context)
+			let initial_end = new Date()
+			let initial_start = new Date()
+			initial_start.setDate(initial_end.getDate()-183)
+			let initial_sliderMax = Math.ceil(
+						Math.abs(initial_end.getTime() - initial_start.getTime())/(1000*3600*24)
+				);
 		    this.state = {
 				sliderValue: 0,
-				startDate: new Date("06/30/1970"),
-				endDate: new Date(),
+				startDate: initial_start,
+				endDate: initial_end,
+				sliderMax: initial_sliderMax,
 				isPlaying: false,
 				btnText: "play"
 			}
@@ -117,6 +130,16 @@ class App extends Component {
 			endDate: date
 		})
 	};
+
+	updateMaxSliderVal(){
+		let start = new Date(this.state.startDate)
+		let end = new Date(this.state.endDate)
+		let sliderMax =  Math.ceil(Math.abs(end.getTime() - start.getTime())/(1000*3600*24));
+		this.setState({
+			sliderMax: sliderMax
+		})
+		
+	}
 	//Play button click
 	handleClick(){
 		if (this.state.isPlaying === true){
@@ -124,14 +147,35 @@ class App extends Component {
 				isPlaying : false,
 				btnText : "play"
 			});
+			clearInterval(this.timer_id);
 		} else {
+			this.updateMaxSliderVal();
 			this.setState({
 				isPlaying : true,
 				btnText : "pause"
 			});
-			//TODO: set timeout to 16ms (60FPS)
-			//in timeout, update slider each second
-			//check for max value of slider, if it is at max value set state.isPlaying to false
+			if (this.state.sliderValue === this.state.sliderMax){
+				this.setState({
+					sliderValue: 0
+				});
+			}
+			this.timer_id = setInterval(()=>this.updateData(), 16);
+		}
+	}
+
+	updateData(){
+	
+		if (this.state.sliderValue < this.state.sliderMax){
+			let val = this.state.sliderValue + 1
+			this.setState({
+				sliderValue: val
+			});
+		} else {
+			this.setState({
+				isPlaying: false,
+				btnText: "play"
+			});
+			clearInterval(this.timer_id);
 		}
 	}
 
@@ -147,7 +191,7 @@ class App extends Component {
 					<div className="slider">
 						<Slider 
 							min={0}
-							max={100}
+							max={this.state.sliderMax}
 							step={1}
 							value={sliderValue}
 							onChange={this.handleSliderChange}
