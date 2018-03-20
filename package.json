@@ -1,7 +1,7 @@
 {
   "homepage": "http://vbetts.github.io/solar-system",
   "name": "solar-system",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "dependencies": {
     "gh-pages": "^1.1.0",

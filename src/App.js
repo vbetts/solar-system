@@ -98,7 +98,7 @@ class App extends Component {
 		    super(props, context)
 			let initial_end = new Date()
 			let initial_start = new Date()
-			initial_start.setDate(initial_end.getDate()-183)
+			initial_start.setDate(initial_end.getDate()-365)
 			let initial_sliderMax = Math.ceil(
 						Math.abs(initial_end.getTime() - initial_start.getTime())/(1000*3600*24)
 				);
@@ -180,10 +180,6 @@ class App extends Component {
 	}
 
 	render() {
-		const { sliderValue } = this.state
-
-		const btnContent = this.state.btnText
-
 		return (
 			<MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)} >
 			<div className="main">
@@ -193,7 +189,7 @@ class App extends Component {
 							min={0}
 							max={this.state.sliderMax}
 							step={1}
-							value={sliderValue}
+							value={this.state.sliderValue}
 							onChange={this.handleSliderChange}
 						/>
 					</div>
@@ -214,7 +210,7 @@ class App extends Component {
 						</div>
 					</div>
 					<div className="btn">
-						<FlatButton label={btnContent} onClick={this.handleClick} />
+						<FlatButton label={this.state.btnText} onClick={this.handleClick} />
 					</div>
 				</div>
 				<div id="canvasContainer">	
