@@ -11,22 +11,35 @@ import Snackbar from 'material-ui/Snackbar';
 //Planet data
 import { Canvas } from './Canvas.js';
 
+const BTN_TEXT = {
+	"stop"	:	"pause",
+	"start"	:	"play"
+};
+
+function getMaxSliderVal(startDate, endDate){
+	let start = new Date(startDate)
+	let end = new Date(endDate-1)
+	console.log(end)
+
+	let sliderMax =  Math.ceil(Math.abs(end.getTime() - start.getTime())/(1000*3600*24));
+	return sliderMax;
+}
+
+
 class App extends Component {
 	constructor (props, context) {
 		    super(props, context)
 			let initial_end = new Date()
 			let initial_start = new Date()
 			initial_start.setDate(initial_end.getDate()-365)
-			let initial_sliderMax = Math.ceil(
-						Math.abs(initial_end.getTime() - initial_start.getTime())/(1000*3600*24)
-				);
+			let initial_sliderMax = getMaxSliderVal(initial_start, initial_end);
 		    this.state = {
 				sliderValue		:	0,
 				startDate		: 	initial_start,
 				endDate			: 	initial_end,
 				sliderMax		: 	initial_sliderMax,
 				isPlaying		:	false,
-				btnText			: 	"play",
+				btnText			: 	BTN_TEXT.start,
 				openSnackbar	: 	false,
 				dateMsg			: 	""
 			}
@@ -37,6 +50,16 @@ class App extends Component {
 		this.setState({
 			sliderValue: value
 		})
+	};
+
+	handleDrag = (event) => {
+		if (this.state.isPlaying === true){
+			clearInterval(this.timer_id);
+			this.setState({
+				isPlaying : false,
+				btnText : BTN_TEXT.start
+			});
+		}
 	};
 
 
@@ -79,6 +102,7 @@ class App extends Component {
 		months[d.getMonth()] + " " + 
 		d.getDate() + ", " + 
 		d.getFullYear();
+
 		this.setState({
 			openSnackbar: true,
 			dateMsg: msg
@@ -88,39 +112,33 @@ class App extends Component {
 
 	//Start date picker
 	onStartChange = (event, date) => {
+		let sliderMax = getMaxSliderVal(date, this.state.endDate);
 		this.setState({ 
-			startDate: date
-		})
+			startDate: date,
+			sliderMax: sliderMax
+		});
 	};
 	//End date picker
 	onEndChange = (event, date) => {
+		let sliderMax = getMaxSliderVal(this.state.startDate, date);
 		this.setState({ 
-			endDate: date
-		})
+			endDate: date,
+			sliderMax: sliderMax
+		});
 	};
 
-	updateMaxSliderVal(){
-		let start = new Date(this.state.startDate)
-		let end = new Date(this.state.endDate)
-		let sliderMax =  Math.ceil(Math.abs(end.getTime() - start.getTime())/(1000*3600*24));
-		this.setState({
-			sliderMax: sliderMax
-		})
-		
-	}
 	//Play button click
 	handleClick(){
 		if (this.state.isPlaying === true){
 			this.setState({
 				isPlaying : false,
-				btnText : "play"
+				btnText : BTN_TEXT.start
 			});
 			clearInterval(this.timer_id);
 		} else {
-			this.updateMaxSliderVal();
 			this.setState({
 				isPlaying : true,
-				btnText : "pause"
+				btnText : BTN_TEXT.stop
 			});
 			if (this.state.sliderValue === this.state.sliderMax){
 				this.setState({
@@ -161,6 +179,7 @@ class App extends Component {
 							value={this.state.sliderValue}
 							onChange={this.handleSliderChange}
 							onDragStop={this.showDate}
+							onDragStart={this.handleDrag}
 						/>
 					</div>
 					<div className="calendars">
