@@ -19,7 +19,6 @@ const BTN_TEXT = {
 function getMaxSliderVal(startDate, endDate){
 	let start = new Date(startDate)
 	let end = new Date(endDate-1)
-	console.log(end)
 
 	let sliderMax =  Math.ceil(Math.abs(end.getTime() - start.getTime())/(1000*3600*24));
 	return sliderMax;
